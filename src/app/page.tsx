@@ -372,7 +372,7 @@ export default function Home() {
                 <div>
                   <strong className="text-accent block mb-1">{t('strictRules')}:</strong>
                   <ul className="list-disc pl-4 space-y-1 text-slate-400 text-xs">
-                    {selectedTempleDetails.visitingInfo.rules.map((rule, idx) => (
+                    {selectedTempleDetails.visitingInfo.rules.map((rule: string, idx: number) => (
                       <li key={idx}>{rule}</li>
                     ))}
                   </ul>
