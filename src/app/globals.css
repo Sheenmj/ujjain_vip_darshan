@@ -1,26 +1,193 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf9f5; /* Clean, warm sandstone off-white background */
+  --foreground: #0f172a; /* Slate 900 */
+  --card: #ffffff; /* Pure white for cards */
+  --card-foreground: #1e293b;
+  --popover: #ffffff;
+  --popover-foreground: #1e293b;
+  --primary: #ea580c; /* Saffron Orange */
+  --primary-foreground: #ffffff;
+  --secondary: #b91c1c; /* Crimson / Vermillion */
+  --secondary-foreground: #ffffff;
+  --muted: #f1f5f9; /* Light Slate gray */
+  --muted-foreground: #64748b;
+  --accent: #d97706; /* Warm Temple Gold */
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0; /* Light border color */
+  --input: #ffffff;
+  --ring: #ea580c;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-lg: 0px;
+  --radius-md: 0px;
+  --radius-sm: 0px;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
 }
+
+/* Redefining Glassmorphism for Light Mode */
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.glass-premium {
+  background: linear-gradient(135deg, rgba(234, 88, 12, 0.06) 0%, rgba(255, 255, 255, 0.95) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(234, 88, 12, 0.18);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #faf9f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}
+
+/* Glow effects adapted for light backgrounds */
+.glow-saffron {
+  box-shadow: 0 4px 20px rgba(234, 88, 12, 0.15);
+}
+.glow-gold {
+  box-shadow: 0 4px 20px rgba(217, 119, 6, 0.12);
+}
+
+/* Global Styles Overrides for Dark-on-Light Theme Transition */
+
+/* Text colors */
+.text-slate-100:not(.text-white) {
+  color: #0f172a !important; /* Dark Slate 900 */
+}
+.text-slate-200:not(.text-white) {
+  color: #1e293b !important; /* Slate 800 */
+}
+.text-slate-300:not(.text-white):not(.text-slate-200) {
+  color: #334155 !important; /* Slate 700 */
+}
+.text-slate-400 {
+  color: #475569 !important; /* Slate 600 */
+}
+.text-slate-500 {
+  color: #64748b !important; /* Slate 500 */
+}
+
+/* Input Fields text color correction */
+input, select, textarea {
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+input::placeholder, textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Override background containers to become off-white card items */
+.bg-slate-900,
+.bg-slate-950,
+.bg-slate-900\/50,
+.bg-slate-900\/80,
+.bg-slate-900\/40,
+.bg-slate-900\/20,
+.bg-slate-900\/30,
+.bg-slate-900\/60,
+.bg-slate-950\/40 {
+  background-color: #ffffff !important;
+  color: #1e293b !important;
+}
+
+/* Specific red overrides */
+.bg-red-955 {
+  background-color: #fee2e2 !important; /* soft red */
+}
+.bg-red-955\/80 {
+  background-color: rgba(254, 226, 226, 0.8) !important;
+}
+.bg-red-950\/40 {
+  background-color: #fef2f2 !important;
+}
+
+/* Force light borders */
+.border-white\/5,
+.border-white\/10,
+.border-white\/15,
+.border-white\/20,
+.border-slate-800,
+.border-slate-700 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Link active states and hover items */
+.hover\:bg-slate-800:hover {
+  background-color: #f1f5f9 !important;
+}
+.hover\:bg-slate-700:hover {
+  background-color: #e2e8f0 !important;
+}
+.bg-slate-800 {
+  background-color: #f1f5f9 !important;
+}
+.bg-slate-800\/80 {
+  background-color: #f1f5f9 !important;
+}
+
+/* Color badges overrides for off-white theme readability */
+.bg-emerald-950 {
+  background-color: #d1fae5 !important; /* emerald 100 */
+}
+.text-emerald-400 {
+  color: #065f46 !important; /* emerald 800 */
+}
+.bg-amber-950 {
+  background-color: #fef3c7 !important; /* amber 100 */
+}
+.text-amber-400 {
+  color: #92400e !important; /* amber 800 */
+}
+.bg-red-955, .bg-red-950 {
+  background-color: #fee2e2 !important; /* red 100 */
+}
+.text-red-400 {
+  color: #991b1b !important; /* red 800 */
+}
+
