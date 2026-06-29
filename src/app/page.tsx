@@ -280,7 +280,7 @@ export default function Home() {
                 
                 <div className="flex items-center justify-between mt-4">
                   <div className="flex flex-wrap gap-1.5">
-                    {temple.deity.primaryFestivals.slice(0, 2).map((fest, i) => (
+                    {temple.deity.primaryFestivals.slice(0, 2).map((fest: string, i: number) => (
                       <span key={i} className="text-[10px] px-2 py-0.5 bg-primary/10 text-primary font-bold border border-primary/20">
                         {fest}
                       </span>
