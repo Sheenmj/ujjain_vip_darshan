@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
         apiKey: process.env.PINECONE_API_KEY,
       });
     }
-    const { messages } = await req.json();
+    const { messages, language } = await req.json();
     
     if (!messages || messages.length === 0) {
       return NextResponse.json({ error: 'Messages are required' }, { status: 400 });
@@ -54,9 +54,20 @@ export async function POST(req: NextRequest) {
     }
 
     // 4. Construct the prompt with RAG context
+    const languageInstruction = language === 'hi' 
+      ? 'CRITICAL: You MUST answer strictly in Hindi language.' 
+      : language === 'ta' 
+      ? 'CRITICAL: You MUST answer strictly in Tamil language.'
+      : language === 'te'
+      ? 'CRITICAL: You MUST answer strictly in Telugu language.'
+      : language === 'gu'
+      ? 'CRITICAL: You MUST answer strictly in Gujarati language.'
+      : 'You must answer in English.';
+
     const systemPrompt = `You are the official AI Assistant for the Ujjain Darshan Portal. 
 Your goal is to help users book temple visits, understand services, answer FAQs, and guide them through the platform.
 Be polite, highly professional, and concise.
+${languageInstruction}
 
 Website Context (Use this to answer queries accurately):
 ${context ? context : 'No specific context retrieved. Rely on general knowledge about Ujjain and the portal.'}`;

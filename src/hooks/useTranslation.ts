@@ -95,7 +95,13 @@ const translations = {
 
     // Advisory Notice
     advisoryTitle: "Official Advisory & Fraud Warning",
-    advisoryBody: "The Government of Madhya Pradesh and the Devasthan Management Board have not authorized any third-party agents, guides, or external websites to sell VIP Darshan tickets. All bookings must be made exclusively through this official portal or at authorized physical counters. Engaging with touts is illegal and will lead to strict legal action and ticket cancellation."
+    advisoryBody: "The Government of Madhya Pradesh and the Devasthan Management Board have not authorized any third-party agents, guides, or external websites to sell VIP Darshan tickets. All bookings must be made exclusively through this official portal or at authorized physical counters. Engaging with touts is illegal and will lead to strict legal action and ticket cancellation.",
+
+    // AI Assistant
+    aiAssistantName: "Darshan Guide AI",
+    aiWelcome: "Hari Om! I am your Ujjain Darshan assistant. How can I help you plan your spiritual journey today?",
+    aiPlaceholder: "Ask about temples, bookings...",
+    aiError: "I apologize, but I am having trouble connecting to my knowledge base right now. Please try again later."
   },
   hi: {
     // Header & Navigation
@@ -189,7 +195,13 @@ const translations = {
     auditLogs: "ऑडिट लॉग्स",
 
     advisoryTitle: "आधिकारिक सलाह और धोखाधड़ी की चेतावनी",
-    advisoryBody: "मध्य प्रदेश सरकार और देवस्थान प्रबंधन बोर्ड ने किसी भी तीसरे पक्ष के एजेंट, गाइड या बाहरी वेबसाइटों को वीआईपी दर्शन टिकट बेचने के लिए अधिकृत नहीं किया है। सभी बुकिंग विशेष रूप से इस आधिकारिक पोर्टल या अधिकृत भौतिक काउंटरों पर की जानी चाहिए। दलालों के साथ जुड़ना अवैध है और इससे सख्त कानूनी कार्रवाई और टिकट रद्द कर दिया जाएगा।"
+    advisoryBody: "मध्य प्रदेश सरकार और देवस्थान प्रबंधन बोर्ड ने किसी भी तीसरे पक्ष के एजेंट, गाइड या बाहरी वेबसाइटों को वीआईपी दर्शन टिकट बेचने के लिए अधिकृत नहीं किया है। सभी बुकिंग विशेष रूप से इस आधिकारिक पोर्टल या अधिकृत भौतिक काउंटरों पर की जानी चाहिए। दलालों के साथ जुड़ना अवैध है और इससे सख्त कानूनी कार्रवाई और टिकट रद्द कर दिया जाएगा।",
+
+    // AI Assistant
+    aiAssistantName: "दर्शन गाइड एआई",
+    aiWelcome: "हरि ओम! मैं आपका उज्जैन दर्शन सहायक हूँ। आज मैं आपकी आध्यात्मिक यात्रा की योजना बनाने में कैसे मदद कर सकता हूँ?",
+    aiPlaceholder: "मंदिरों, बुकिंग के बारे में पूछें...",
+    aiError: "मुझे खेद है, लेकिन अभी मुझे अपने ज्ञानकोष से जुड़ने में समस्या आ रही है। कृपया बाद में पुनः प्रयास करें।"
   },
   ta: {
     // Header & Navigation

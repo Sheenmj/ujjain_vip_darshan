@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, Loader2, Sparkles } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -10,9 +11,10 @@ interface Message {
 }
 
 export default function AIAssistant() {
+  const { t, language } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Hari Om! I am your Ujjain Darshan assistant. How can I help you plan your spiritual journey today?' }
+    { role: 'assistant', content: t('aiWelcome') as string }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +27,17 @@ export default function AIAssistant() {
   useEffect(() => {
     scrollToBottom();
   }, [messages, isLoading]);
+
+  // Update the welcome message if the user changes the language before starting a chat
+  useEffect(() => {
+    setMessages(prev => {
+      const welcomeText = t('aiWelcome') as string;
+      if (prev.length === 1 && prev[0].role === 'assistant' && prev[0].content !== welcomeText) {
+        return [{ role: 'assistant', content: welcomeText }];
+      }
+      return prev;
+    });
+  }, [language, t]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +53,7 @@ export default function AIAssistant() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          language,
           messages: [...messages, { role: 'user', content: userMessage }].map(m => ({
             role: m.role === 'assistant' ? 'model' : 'user',
             content: m.content
@@ -71,7 +85,7 @@ export default function AIAssistant() {
       }
     } catch (error) {
       console.error('Error in chat:', error);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'I apologize, but I am having trouble connecting to my knowledge base right now. Please try again later.' }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: t('aiError') as string }]);
     } finally {
       setIsLoading(false);
     }
@@ -109,7 +123,7 @@ export default function AIAssistant() {
             <div className="p-4 bg-orange-600 text-white flex justify-between items-center shadow-md">
               <div className="flex items-center space-x-2">
                 <Sparkles className="w-5 h-5 text-orange-200" />
-                <h3 className="font-semibold text-lg">Darshan Guide AI</h3>
+                <h3 className="font-semibold text-lg">{t('aiAssistantName') as string}</h3>
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
@@ -155,7 +169,7 @@ export default function AIAssistant() {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask about temples, bookings..."
+                  placeholder={t('aiPlaceholder') as string}
                   className="flex-1 px-4 py-2 bg-gray-100 dark:bg-gray-800 border-transparent rounded-full focus:ring-2 focus:ring-orange-500 focus:border-transparent dark:text-white outline-none transition-all"
                   disabled={isLoading}
                 />
