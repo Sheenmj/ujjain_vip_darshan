@@ -1,0 +1,7 @@
+src/components/BookingWizard.tsx
+src/app/api/chat/route.ts
+src/lib/db.ts
+src/app/admin/page.tsx
+src/components/Footer.tsx
+src/components/Navbar.tsx
+src/hooks/useTemples.ts

@@ -7,6 +7,7 @@ import {
   Users, Activity, ShieldAlert, CheckCircle, XCircle, 
   Search, Lock, Unlock, RefreshCw, Landmark, CreditCard, ClipboardList 
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AdminPage() {
   const { t } = useTranslation();
@@ -214,10 +215,18 @@ export default function AdminPage() {
       </div>
 
       {/* Tab Contents */}
-      <div className="flex-grow flex flex-col">
+      <div className="flex-grow flex flex-col overflow-hidden relative">
+        <AnimatePresence mode="wait">
         {/* TAB 1: Live Bookings */}
         {activeAdminTab === 'live' && (
-          <div className="flex-grow flex flex-col gap-4">
+          <motion.div 
+            key="live"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.2 }}
+            className="flex-grow flex flex-col gap-4"
+          >
             <div className="flex items-center gap-3 bg-slate-900/50 px-4 py-2 border border-white/5">
               <Search className="h-4 w-4 text-slate-500" />
               <input
@@ -280,12 +289,19 @@ export default function AdminPage() {
                 </tbody>
               </table>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {/* TAB 2: VIP Approvals Queue */}
         {activeAdminTab === 'vip' && (
-          <div className="flex-grow flex flex-col gap-4">
+          <motion.div 
+            key="vip"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.2 }}
+            className="flex-grow flex flex-col gap-4"
+          >
             {vipQueue.length === 0 ? (
               <div className="p-8 border border-dashed border-white/5 text-center text-xs text-slate-500">
                 No pending VIP approval requests in queue.
@@ -342,12 +358,19 @@ export default function AdminPage() {
                 ))}
               </div>
             )}
-          </div>
+          </motion.div>
         )}
 
         {/* TAB 3: Slot Quota Manager */}
         {activeAdminTab === 'slots' && (
-          <div className="bg-slate-900/20 border border-white/5 p-6">
+          <motion.div 
+            key="slots"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.2 }}
+            className="bg-slate-900/20 border border-white/5 p-6"
+          >
             <h3 className="text-sm font-bold text-slate-100 border-b border-white/5 pb-3">Slot Configurations</h3>
             
             <div className="mt-4 space-y-4 text-xs">
@@ -385,12 +408,19 @@ export default function AdminPage() {
             <div className="bg-slate-900/60 p-4 border border-white/5 mt-6 text-slate-500 text-xs leading-relaxed">
               <strong>Admin Note:</strong> Changing default slot allocations will automatically apply to any dates created for slots after {new Date(Date.now() + 86400000).toDateString()}. Current active dates must have allocations modified via specific holiday overrides.
             </div>
-          </div>
+          </motion.div>
         )}
 
         {/* TAB 4: Immutable System Audit Logs */}
         {activeAdminTab === 'audit' && (
-          <div className="flex flex-col gap-4">
+          <motion.div 
+            key="audit"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.2 }}
+            className="flex flex-col gap-4"
+          >
             <div className="p-4 bg-slate-950 border border-white/10 flex items-start gap-2.5">
               <ClipboardList className="h-5 w-5 text-accent shrink-0 mt-0.5" />
               <div>
@@ -434,8 +464,9 @@ export default function AdminPage() {
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
+        </AnimatePresence>
       </div>
     </div>
   );

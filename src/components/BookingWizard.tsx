@@ -8,6 +8,7 @@ import {
   CreditCard, QrCode, AlertTriangle, ArrowLeft, 
   ArrowRight, ShieldCheck, Fingerprint, RefreshCw, Plus, Trash2 
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTemples } from '@/hooks/useTemples';
 import { useRouter } from 'next/navigation';
 
@@ -45,12 +46,6 @@ export default function BookingWizard({ isOpen, onClose }: BookingWizardProps) {
   const [liveSlots, setLiveSlots] = useState<any[]>([]);
   const [fetchingSlots, setFetchingSlots] = useState(false);
 
-  useEffect(() => {
-    if (store.selectedTemple && store.selectedDate) {
-      fetchSlots();
-    }
-  }, [store.selectedTemple, store.selectedDate]);
-
   const fetchSlots = async () => {
     if (!store.selectedTemple || !store.selectedDate) return;
     setFetchingSlots(true);
@@ -66,6 +61,12 @@ export default function BookingWizard({ isOpen, onClose }: BookingWizardProps) {
       setFetchingSlots(false);
     }
   };
+
+  useEffect(() => {
+    if (store.selectedTemple && store.selectedDate) {
+      fetchSlots();
+    }
+  }, [store.selectedTemple, store.selectedDate]);
 
   if (!isOpen) return null;
 
@@ -299,8 +300,16 @@ export default function BookingWizard({ isOpen, onClose }: BookingWizardProps) {
   const getTotalPrice = () => getPricePerTicket() * store.devotees.length;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
-      <div className="w-full max-w-3xl bg-card border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
+            className="w-full max-w-3xl bg-card border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+          >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-slate-900/50">
           <div>
@@ -899,7 +908,9 @@ export default function BookingWizard({ isOpen, onClose }: BookingWizardProps) {
             </div>
           )}
         </div>
-      </div>
-    </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 }
